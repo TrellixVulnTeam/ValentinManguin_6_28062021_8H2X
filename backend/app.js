@@ -34,6 +34,6 @@ app.use(helmet());
 
 
 app.use('/api/auth', userRoutes);
-
+app.use('/api/sauces', saucesRoutes);
 
 module.exports = app;
