@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// declaration du schema de chaque sauce
+// declaration du schema mangoose de chaque sauce
 
 const sauceSchema = mongoose.Schema({
     userId: { type: String, required: true },

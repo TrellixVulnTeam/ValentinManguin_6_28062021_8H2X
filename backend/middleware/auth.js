@@ -8,6 +8,7 @@ module.exports = (req, res, next) => {    // Creation du token
       if (req.body.userId && req.body.userId !== userId) {
         throw "user ID non valable";
       } else {
+        req.currentUserId = userId;
         next();
       }
     } catch {

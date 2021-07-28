@@ -1,6 +1,6 @@
 const multer = require('multer'); // Module multer pour gérer les fichiers entrants dans les requêtes HTTP
 
-const MIME_TYPES = {
+const MIME_TYPES = {  // On utilise MIME pour définir le format des images
     "image/jpg": "jpg",
     "image/jpeg": "jpg",
     "image/png": "png",
@@ -13,9 +13,9 @@ const MIME_TYPES = {
       callback(null, "images");
     },
     filename: (req, file, callback) => {
-      const name = file.originalname.split(" ").join("_");
+    //  const name = file.originalname.split(" ").join("_");
       const extension = MIME_TYPES[file.mimetype];
-      callback(null, name + Date.now() + "." + extension);
+      callback(null,  Date.now() + "." + extension);
     },
   });
   

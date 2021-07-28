@@ -4,7 +4,7 @@ const auth = require("../middleware/auth");
 const multer = require("../middleware/multer-config");
 const saucesCtrl = require("../controllers/sauces");
 
-// creation des routes de post des sauces modif get et supprimer sauces
+// creation des routes de post des sauces 
 
 router.post("", auth, multer, saucesCtrl.createSauce);
 router.get("", auth, saucesCtrl.getAllSauce);

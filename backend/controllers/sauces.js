@@ -39,7 +39,9 @@ sauce.save()
       exports.deleteSauce = (req, res, _) => {
         Sauce.findOne({ _id: req.params.id })
           .then((sauce) => {
-            if (sauce.userId !== req.user) {
+            console.log(sauce.userId);
+            console.log(req.currentUserId );
+            if (sauce.userId !== req.currentUserId ) {
               res.status(401).json({message: "action non autorisée"});  
               return sauce;
             }
@@ -98,16 +100,18 @@ exports.likeSauce = (req, res, next) => {
               $inc: { likes: -1 },
             }
           )
-            .catch((error) => res.status(400).json({ error }));
+            .catch((error) => {console.log (error);
+              res.status(400).json({ error : error })});
         } else if (sauce.usersDisliked.includes(req.body.userId)) {
           Sauce.updateOne(
-            { _id: sauceid },
+            { _id: sauceId },
             {
               $pull: { usersDisliked: req.body.userId },
               $inc: { dislikes: -1 },
             }
           )
-            .catch((error) => res.status(400).json({ error }));
+          .catch((error) => {console.log (error);
+            res.status(400).json({ error : error })});
         }
       })
       .then(()=>{
@@ -120,7 +124,8 @@ exports.likeSauce = (req, res, next) => {
             }
           )
             .then(() => res.status(200).json({ message: "Like !" }))
-            .catch((error) => res.status(400).json({ error }));
+            .catch((error) => {console.log (error);
+              res.status(400).json({ error : error })});
         } else if (sauceObject.like === -1) {
           Sauce.updateOne(
             { _id: req.params.id },
@@ -130,13 +135,15 @@ exports.likeSauce = (req, res, next) => {
             }
           )
             .then(() => res.status(200).json({ message: "Dislike !" }))
-            .catch((error) => res.status(400).json({ error }));
+            .catch((error) => {console.log (error);
+              res.status(400).json({ error : error })});
         }
         else
         {
           res.status(200).json({ message: " vous êtes neutre" });
         }
       })
-      .catch((error) => res.status(400).json({ error }));
+      .catch((error) => {console.log (error);
+        res.status(400).json({ error : error })});
   
 };
